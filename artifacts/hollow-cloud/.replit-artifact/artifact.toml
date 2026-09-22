@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Hollow Cloud"
+description = "Painel de hospedagem para bots com importação por ZIP ou GitHub, controles online/offline, planos Free e Pro e gestão clara de recursos."
+version = "1.0.0"
+id = "artifacts/hollow-cloud"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 19338
+
+[services.development]
+run = "pnpm --filter @workspace/hollow-cloud run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/hollow-cloud", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/hollow-cloud/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19338"
+BASE_PATH = "/"

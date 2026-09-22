@@ -1,0 +1,13 @@
+[build]
+  command = "pnpm install --frozen-lockfile && pnpm --filter @workspace/hollow-cloud run build"
+  publish = "artifacts/hollow-cloud/dist/public"
+
+[build.environment]
+  NODE_VERSION = "24"
+  BASE_PATH = "/"
+  PORT = "5173"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
